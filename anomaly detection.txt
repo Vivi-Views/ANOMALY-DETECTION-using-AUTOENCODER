@@ -1,0 +1,59 @@
+dataset - 1000 datapoints
+
+epochs - 1000
+
+
+first epoch  starts here :
+
+data points (1000)
+batch size = data points per batch(100) 
+iterations = 10
+
+-----------------
+
+1 Forward pass
+1 loss computaion
+1 backward pass
+1 update w,b
+
+per batch
+
+when this completes 10 cycles, when all 1000 datapoints are forwarded and backwareded and w's and b's updated, the next iteration starts, am i correct ?
+
+first epoch ends here.
+
+second epoch  starts here :
+
+data points (1000)
+batch size = data points per batch(100) 
+iterations = 10
+
+-----------------
+
+1 Forward pass
+1 loss computaion
+1 backward pass
+1 update w,b
+
+per batch
+
+when this completes 10 cycles, when all 1000 datapoints are forwarded and backwareded and w's and b's updated, the next iteration starts, am i correct ?
+
+second epoch ends here.
+
+Explanation :
+In each epoch, the model iterates through the entire dataset in batches.
+Gradients are accumulated across batches within an epoch to adjust the model parameters.
+
+At the beginning of each epoch, it's essential to zero out gradients (optimizer.zero_grad() in PyTorch) before starting the forward pass. This ensures that gradients from the previous epoch do not influence the current epoch's parameter updates. However, this does not mean resetting the parameters themselves (weights and biases) to zero.
+
+Batch level >  epoch level > network / model level.
+
+Batch Level: Gradients are computed and used to update parameters after processing each batch of data within an epoch. gradients
+Epoch Level: While gradients are not explicitly accumulated across epochs, the parameters are updated iteratively based on gradients computed for each batch within the epoch. only best gradients from each batch
+Model Level: The final model gradients reflect the overall learning process, encompassing adjustments made across all epochs to minimize the loss function and improve prediction accuracy. only best gradients from each batch from each Epoch
+
+
+
+
+
